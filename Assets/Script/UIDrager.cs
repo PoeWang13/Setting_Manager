@@ -17,11 +17,17 @@ public class UIDrager : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        SetBackgroundColor(0.3f);
+        if (Setting_Manager.canMoveUI)
+        {
+            SetBackgroundColor(0.3f);
+        }
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        SetBackgroundColor(1);
+        if (Setting_Manager.canMoveUI)
+        {
+            SetBackgroundColor(1);
+        }
     }
     private void SetBackgroundColor(float alpha)
     {
@@ -33,6 +39,9 @@ public class UIDrager : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     }
     public void OnDrag(PointerEventData eventData)
     {
-        dragingRect.anchoredPosition += eventData.delta / myCanvas.scaleFactor;
+        if (Setting_Manager.canMoveUI)
+        {
+            dragingRect.anchoredPosition += eventData.delta / myCanvas.scaleFactor;
+        }
     }
 }
