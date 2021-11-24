@@ -13,11 +13,10 @@ public class Setting_Manager : MonoBehaviour
         {
             instance = this;
         }
-        else if (Instance != this)
+        else if (instance != this)
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
     }
     private void Start()
     {
@@ -72,7 +71,10 @@ public class Setting_Manager : MonoBehaviour
     [SerializeField] private Slider backGroundSlider;
     private void LearnBackGroundMusic()
     {
-        backGroundSlider.value = PlayerPrefs.GetInt("BackGroundMusic", 0);
+        if (backGroundSlider != null)
+        {
+            backGroundSlider.value = PlayerPrefs.GetInt("BackGroundMusic", 0);
+        }
     }
     public void BackGroundMusic(float volume)
     {
@@ -85,7 +87,10 @@ public class Setting_Manager : MonoBehaviour
     [SerializeField] private Slider uISlider;
     private void LearnUIMusic()
     {
-        uISlider.value = PlayerPrefs.GetInt("UIMusic", 0);
+        if (uISlider != null)
+        {
+            uISlider.value = PlayerPrefs.GetInt("UIMusic", 0);
+        }
     }
     public void UIMusic(float volume)
     {
@@ -98,7 +103,10 @@ public class Setting_Manager : MonoBehaviour
     [SerializeField] private Slider effectSlider;
     private void LearnEffectMusic()
     {
-        effectSlider.value = PlayerPrefs.GetInt("EffectMusic", 0);
+        if (effectSlider != null)
+        {
+            effectSlider.value = PlayerPrefs.GetInt("EffectMusic", 0);
+        }
     }
     public void EffectMusic(float volume)
     {
@@ -111,7 +119,10 @@ public class Setting_Manager : MonoBehaviour
     [SerializeField] private Slider gunSlider;
     private void LearnGunMusic()
     {
-        gunSlider.value = PlayerPrefs.GetInt("GunMusic", 0);
+        if (gunSlider != null)
+        {
+            gunSlider.value = PlayerPrefs.GetInt("GunMusic", 0);
+        }
     }
     public void GunMusic(float volume)
     {
@@ -124,7 +135,10 @@ public class Setting_Manager : MonoBehaviour
     [SerializeField] private Slider explosionSlider;
     private void LearnExplosionMusic()
     {
-        explosionSlider.value = PlayerPrefs.GetInt("ExplosionMusic", 0);
+        if (explosionSlider != null)
+        {
+            explosionSlider.value = PlayerPrefs.GetInt("ExplosionMusic", 0);
+        }
     }
     public void ExplosionMusic(float volume)
     {
@@ -137,7 +151,10 @@ public class Setting_Manager : MonoBehaviour
     [SerializeField] private Slider pop_UpSlider;
     private void LearnPop_UpMusic()
     {
-        pop_UpSlider.value = PlayerPrefs.GetInt("Pop_UpMusic", 0);
+        if (pop_UpSlider != null)
+        {
+            pop_UpSlider.value = PlayerPrefs.GetInt("Pop_UpMusic", 0);
+        }
     }
     public void Pop_UpMusic(float volume)
     {
@@ -150,14 +167,13 @@ public class Setting_Manager : MonoBehaviour
     [SerializeField] private Slider dropSlider;
     private void LearnDropMusic()
     {
-        dropSlider.value = PlayerPrefs.GetInt("DropMusic", 0);
+        if (dropSlider != null)
+        {
+            dropSlider.value = PlayerPrefs.GetInt("DropMusic", 0);
+        }
     }
     public void DropMusic(float volume)
     {
-        if (true)
-        {
-
-        }
         allMusicMixer.SetFloat("Drop", volume);
         PlayerPrefs.SetInt("DropMusic", (int)volume);
     }
@@ -165,13 +181,16 @@ public class Setting_Manager : MonoBehaviour
     #endregion
 
     #region Vibration
-    private void LearnVibration()
-    {
-        canVibration = PlayerPrefs.GetInt("canVibration", canVibration ? 0 : 1) == 0 ? true : false;
-        vibrationToggle.isOn = canVibration;
-    }
     public static bool canVibration;
     [SerializeField] private Toggle vibrationToggle;
+    private void LearnVibration()
+    {
+        if (canMoveUIToggle != null)
+        {
+            canVibration = PlayerPrefs.GetInt("canVibration", canVibration ? 0 : 1) == 0 ? true : false;
+            vibrationToggle.isOn = canVibration;
+        }
+    }
     public void ChangeVibration(bool isActive)
     {
         canVibration = isActive;
@@ -180,13 +199,16 @@ public class Setting_Manager : MonoBehaviour
     #endregion
 
     #region Move UI
-    private void LearnMoveUI()
-    {
-        canMoveUI = PlayerPrefs.GetInt("canMoveUI", canMoveUI ? 0 : 1) == 0 ? true : false;
-        canMoveUIToggle.isOn = canMoveUI;
-    }
     public static bool canMoveUI;
     [SerializeField] private Toggle canMoveUIToggle;
+    private void LearnMoveUI()
+    {
+        if (canMoveUIToggle != null)
+        {
+            canMoveUI = PlayerPrefs.GetInt("canMoveUI", canMoveUI ? 0 : 1) == 0 ? true : false;
+            canMoveUIToggle.isOn = canMoveUI;
+        }
+    }
     public void ChangeMoveUI(bool isActive)
     {
         canMoveUI = isActive;
@@ -195,13 +217,16 @@ public class Setting_Manager : MonoBehaviour
     #endregion
 
     #region Language
-    private void LearnLanguage()
-    {
-        languageNumber = PlayerPrefs.GetInt("languageNumber", languageNumber);
-        languageDropdown.value = languageNumber;
-    }
     public static int languageNumber;
     [SerializeField] private TMP_Dropdown languageDropdown;
+    private void LearnLanguage()
+    {
+        if (languageDropdown != null)
+        {
+            languageNumber = PlayerPrefs.GetInt("languageNumber", languageNumber);
+            languageDropdown.value = languageNumber;
+        }
+    }
     public void ChangeLanguage(int langNumber)
     {
         languageNumber = langNumber;
